@@ -1,28 +1,28 @@
-package com.bishal.androidcleanarchitecture_mvvm_hilt_rx.ui.album
+package com.bishal.androidcleanarchitecture_mvvm_hilt_rx.ui.fragment.album
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.BR
 import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.R
 import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.databinding.FragmentAlbumsBinding
 import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.domain.model.Album
-import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.ui.gallery.OnGalleryCallback
+import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.ui.activity.gallery.OnGalleryCallback
+import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.ui.fragment.BaseFragment
+import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.viewmodel.albums.AlbumsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AlbumsFragment : Fragment(), OnAlbumsAdapterListener {
+class AlbumsFragment : BaseFragment<FragmentAlbumsBinding>(), OnAlbumsAdapterListener {
 
-    private lateinit var fragmentAlbumsBinding: FragmentAlbumsBinding
     private var adapter: AlbumsAdapter? = null
     private var mCallback: OnGalleryCallback? = null
 
-    private val viewModel: AlbumsViewModel by viewModels()
+
+    override val layoutRes: Int = R.layout.fragment_albums
+    override val bindingVariable = BR.viewModel
+    override val viewModel: AlbumsViewModel by viewModels()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -37,31 +37,28 @@ class AlbumsFragment : Fragment(), OnAlbumsAdapterListener {
         viewModel.loadAlbums()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        fragmentAlbumsBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_albums, container, false)
-        fragmentAlbumsBinding.albumsViewModel = viewModel
-        fragmentAlbumsBinding.albumsRecyclerView.adapter = adapter
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        dataBinding.albumsRecyclerView.adapter = adapter
 
         viewModel.isLoad.observe(
-            viewLifecycleOwner,
-            Observer {
-                it?.let { visibility ->
-                    fragmentAlbumsBinding.albumsProgressBar.visibility = if (visibility) View.GONE else View.VISIBLE
-                }
+            viewLifecycleOwner
+        ) {
+            it?.let { visibility ->
+                dataBinding.albumsProgressBar.visibility =
+                    if (visibility) View.GONE else View.VISIBLE
             }
-        )
+        }
 
         viewModel.albumsReceivedLiveData.observe(
-            viewLifecycleOwner,
-            Observer {
-                it?.let {
-                    initRecyclerView(it)
-                }
+            viewLifecycleOwner
+        ) {
+            it?.let {
+                initRecyclerView(it)
             }
-        )
-
-        return fragmentAlbumsBinding.root
+        }
     }
+
 
     override fun showPhotos(album: Album) {
         mCallback?.navigateToAlbumPage(album)

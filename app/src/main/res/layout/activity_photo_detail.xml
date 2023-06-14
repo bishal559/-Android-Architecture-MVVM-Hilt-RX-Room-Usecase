@@ -3,7 +3,7 @@
     <data>
         <import type="android.view.View"/>
 
-        <variable name="photoDetailViewModel" type="com.bishal.androidcleanarchitecture_mvvm_hilt_rx.ui.detailphoto.PhotoDetailViewModel"/>
+        <variable name="photoDetailViewModel" type="com.bishal.androidcleanarchitecture_mvvm_hilt_rx.viewmodel.photos.PhotoDetailViewModel"/>
 
     </data>
 

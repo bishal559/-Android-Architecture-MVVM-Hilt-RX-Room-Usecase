@@ -5,7 +5,7 @@
 
         <import type="android.view.View"/>
 
-        <variable name="photosViewModel" type="com.bishal.androidcleanarchitecture_mvvm_hilt_rx.ui.photo.PhotosViewModel"/>
+        <variable name="photosViewModel" type="com.bishal.androidcleanarchitecture_mvvm_hilt_rx.viewmodel.photos.PhotosViewModel"/>
 
     </data>
 

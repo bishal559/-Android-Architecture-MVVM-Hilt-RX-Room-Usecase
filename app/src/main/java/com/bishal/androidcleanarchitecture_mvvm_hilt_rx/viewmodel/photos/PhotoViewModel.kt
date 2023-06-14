@@ -1,4 +1,4 @@
-package com.bishal.androidcleanarchitecture_mvvm_hilt_rx.ui.photo
+package com.bishal.androidcleanarchitecture_mvvm_hilt_rx.viewmodel.photos
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

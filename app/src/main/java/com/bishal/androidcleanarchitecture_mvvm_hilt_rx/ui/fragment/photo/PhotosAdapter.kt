@@ -1,4 +1,4 @@
-package com.bishal.androidcleanarchitecture_mvvm_hilt_rx.ui.photo
+package com.bishal.androidcleanarchitecture_mvvm_hilt_rx.ui.fragment.photo
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +10,7 @@ import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.R
 import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.common.loadImage
 import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.databinding.HolderPhotoBinding
 import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.domain.model.Photo
+import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.viewmodel.photos.PhotoViewModel
 
 /**
  * [android.support.v7.widget.RecyclerView.Adapter] to adapt

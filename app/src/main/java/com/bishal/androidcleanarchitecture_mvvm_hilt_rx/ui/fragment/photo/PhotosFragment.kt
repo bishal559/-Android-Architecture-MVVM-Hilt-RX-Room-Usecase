@@ -1,27 +1,28 @@
-package com.bishal.androidcleanarchitecture_mvvm_hilt_rx.ui.photo
+package com.bishal.androidcleanarchitecture_mvvm_hilt_rx.ui.fragment.photo
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.BR
 import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.R
 import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.databinding.FragmentPhotosBinding
-import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.ui.gallery.OnGalleryCallback
+import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.ui.activity.gallery.OnGalleryCallback
+import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.ui.fragment.BaseFragment
+import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.viewmodel.photos.PhotosViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PhotosFragment : Fragment(), OnPhotosAdapterListener {
+class PhotosFragment : BaseFragment<FragmentPhotosBinding>(), OnPhotosAdapterListener {
 
-    private lateinit var fragmentPhotosBinding: FragmentPhotosBinding
     private var adapter: PhotosAdapter? = null
     private var mCallback: OnGalleryCallback? = null
-    private val viewModel: PhotosViewModel by viewModels()
+
+
+    override val layoutRes: Int = R.layout.fragment_photos
+    override val bindingVariable = BR.viewModel
+    override val viewModel: PhotosViewModel by viewModels()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -37,36 +38,26 @@ class PhotosFragment : Fragment(), OnPhotosAdapterListener {
         viewModel.loadPhotos(albumId)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        fragmentPhotosBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_photos, container, false)
-        fragmentPhotosBinding.photosViewModel = viewModel
-        fragmentPhotosBinding.photosRecyclerView.adapter = adapter
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        dataBinding.photosRecyclerView.adapter = adapter
 
         viewModel.isLoad.observe(
-            viewLifecycleOwner,
-            Observer {
-                it?.let { visibility ->
-                    fragmentPhotosBinding.photosProgressBar.visibility =
-                        if (visibility) View.GONE else View.VISIBLE
-                }
+            viewLifecycleOwner
+        ) {
+            it?.let { visibility ->
+                dataBinding.photosProgressBar.visibility =
+                    if (visibility) View.GONE else View.VISIBLE
             }
-        )
+        }
 
         viewModel.photoListReceivedLiveData.observe(
-            viewLifecycleOwner,
-            Observer {
-                it?.let {
-                    adapter?.addData(it)
-                }
+            viewLifecycleOwner
+        ) {
+            it?.let {
+                adapter?.addData(it)
             }
-        )
-
-        return fragmentPhotosBinding.root
+        }
     }
 
     override fun gotoDetailPage(imageView: ImageView, id: Long) {

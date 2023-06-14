@@ -1,4 +1,4 @@
-package com.bishal.androidcleanarchitecture_mvvm_hilt_rx.ui.album
+package com.bishal.androidcleanarchitecture_mvvm_hilt_rx.ui.fragment.album
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.R
 import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.databinding.HolderAlbumBinding
 import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.domain.model.Album
+import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.viewmodel.albums.AlbumViewModel
 
 /**
  * This class is responsible for converting each data entry [Album]

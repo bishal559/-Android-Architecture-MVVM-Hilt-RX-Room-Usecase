@@ -1,9 +1,10 @@
-package com.bishal.androidcleanarchitecture_mvvm_hilt_rx.ui.album
+package com.bishal.androidcleanarchitecture_mvvm_hilt_rx.viewmodel.albums
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.domain.model.Album
 import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.domain.usecase.GetAlbumsUseCase
+import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.viewmodel.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -15,7 +16,7 @@ import javax.inject.Inject
  * */
 @HiltViewModel
 class AlbumsViewModel @Inject constructor(private val getAlbumListUseCase: GetAlbumsUseCase) :
-    ViewModel() {
+    BaseViewModel() {
 
     val albumsReceivedLiveData = MutableLiveData<List<Album>>()
     val isLoad = MutableLiveData<Boolean>()

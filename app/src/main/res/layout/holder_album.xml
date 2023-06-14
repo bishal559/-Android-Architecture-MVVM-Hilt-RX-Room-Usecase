@@ -3,7 +3,7 @@
     <data>
 
         <import type="android.view.View"/>
-        <variable name="albumViewModel" type="com.bishal.androidcleanarchitecture_mvvm_hilt_rx.ui.album.AlbumViewModel"/>
+        <variable name="albumViewModel" type="com.bishal.androidcleanarchitecture_mvvm_hilt_rx.viewmodel.albums.AlbumViewModel"/>
     </data>
 
 

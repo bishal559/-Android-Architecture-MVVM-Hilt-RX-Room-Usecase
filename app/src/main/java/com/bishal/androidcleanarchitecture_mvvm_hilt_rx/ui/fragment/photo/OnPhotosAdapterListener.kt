@@ -1,4 +1,4 @@
-package com.bishal.androidcleanarchitecture_mvvm_hilt_rx.ui.photo
+package com.bishal.androidcleanarchitecture_mvvm_hilt_rx.ui.fragment.photo
 
 import android.widget.ImageView
 

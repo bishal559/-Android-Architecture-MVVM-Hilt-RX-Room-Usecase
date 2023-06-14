@@ -16,7 +16,7 @@
         android:theme="@style/Theme.AndroidCleanArchitectureMVVMHiltRx"
         tools:targetApi="31">
         <activity
-            android:name=".ui.gallery.GalleryActivity"
+            android:name=".ui.activity.gallery.GalleryActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.detailphoto.PhotoDetailActivity"
+            android:name=".ui.activity.detailphoto.PhotoDetailActivity"
             android:theme="@style/Base.Theme.AndroidCleanArchitectureMVVMHiltRx" />
     </application>
 

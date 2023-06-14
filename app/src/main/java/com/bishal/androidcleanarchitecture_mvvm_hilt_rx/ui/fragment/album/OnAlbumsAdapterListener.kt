@@ -1,4 +1,4 @@
-package com.bishal.androidcleanarchitecture_mvvm_hilt_rx.ui.album
+package com.bishal.androidcleanarchitecture_mvvm_hilt_rx.ui.fragment.album
 
 import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.domain.model.Album
 

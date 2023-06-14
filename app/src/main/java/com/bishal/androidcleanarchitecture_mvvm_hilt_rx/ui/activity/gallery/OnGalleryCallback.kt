@@ -1,4 +1,4 @@
-package com.bishal.androidcleanarchitecture_mvvm_hilt_rx.ui.gallery
+package com.bishal.androidcleanarchitecture_mvvm_hilt_rx.ui.activity.gallery
 
 import android.widget.ImageView
 import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.domain.model.Album

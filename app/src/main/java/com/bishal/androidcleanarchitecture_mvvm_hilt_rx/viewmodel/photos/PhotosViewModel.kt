@@ -1,9 +1,10 @@
-package com.bishal.androidcleanarchitecture_mvvm_hilt_rx.ui.photo
+package com.bishal.androidcleanarchitecture_mvvm_hilt_rx.viewmodel.photos
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.domain.model.Photo
 import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.domain.usecase.GetPhotosUseCase
+import com.bishal.androidcleanarchitecture_mvvm_hilt_rx.viewmodel.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -15,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PhotosViewModel @Inject constructor(
     private val getPhotosUseCase: GetPhotosUseCase
-) : ViewModel() {
+) : BaseViewModel() {
 
     val photoListReceivedLiveData = MutableLiveData<List<Photo>>()
     val isLoad = MutableLiveData<Boolean>()
