@@ -1,0 +1,117 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+}
+def appConfigPropertiesFile = rootProject.file("appConfig.properties")
+def appConfig = new Properties()
+appConfig.load(new FileInputStream(appConfigPropertiesFile))
+android {
+    namespace 'com.bishal.androidcleanarchitecture_mvvm_hilt_rx'
+    compileSdk rootProject.compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.bishal.androidcleanarchitecture_mvvm_hilt_rx"
+        minSdk rootProject.minSdkVersion
+        targetSdk rootProject.targetSdkVersion
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    flavorDimensions "app"
+    productFlavors {
+        dev {
+            dimension "app"
+            manifestPlaceholders = [appLabel: "@string/app_name"]
+            buildConfigField("String", "BASE_URL", appConfig['development_url'])
+            applicationIdSuffix '.dev'
+        }
+        Production {
+            dimension "app"
+            manifestPlaceholders = [appLabel: "@string/app_name"]
+            buildConfigField("String", "BASE_URL", appConfig['production_url'])
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+    buildFeatures {
+        buildConfig = true
+    }
+    buildFeatures {
+        dataBinding true
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation "androidx.core:core-ktx:$ktxVersion"
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
+    implementation "com.google.android.material:material:$materialVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$testExtJunitVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+
+    //    dagger hilt
+    implementation "com.google.dagger:hilt-android:$daggerHiltVersion"
+    kapt "com.google.dagger:hilt-android-compiler:$daggerHiltVersion"
+
+    // kotlin coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutinesVersion"
+
+//    viewModel life cycle
+    implementation "androidx.fragment:fragment-ktx:$fragmentVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewModelVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$viewModelVersion"
+
+
+
+    //retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_converter_version"
+
+    //okhttp
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_interceptor_version"
+    implementation "com.squareup.okhttp3:okhttp-urlconnection:$okhttp_urlconnection_version"
+
+
+    //gson
+    implementation "com.google.code.gson:gson:$gson_version"
+
+
+    //rx-java
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2_adapter_rxjava2_version"
+
+    //multidex
+    implementation "androidx.multidex:multidex:$multidex_version"
+
+
+    //picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //room
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-rxjava2:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+}
