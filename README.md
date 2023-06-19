@@ -10,7 +10,8 @@ The project follows the Clean Architecture approach, dividing the codebase into 
 - Domain: Contains the business logic and use cases.
 - Data: Manages the data sources and repositories.
 
-![Project Structure](https://github.com/bishal559/-Android-Architecture-MVVM-Hilt-RX-Room-Usecase/assets/65449966/3e3f0c48-5e5b-4d73-aa9c-d4bf1b222d22)
+
+![Project Structure](![Screenshot 2023-06-19 at 17 07 19](https://github.com/bishal559/-Android-Architecture-MVVM-Hilt-RX-Room-Usecase/assets/65449966/2784c5ec-74de-4bb7-8f19-7350305cfab0))
 
 ## Communication between Layers
 
